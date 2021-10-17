@@ -26,8 +26,7 @@ class GeoServiceImplTest {
     @MethodSource("factory")
     void byIp(String ipAddress, Location expectedLocation) {
 
-
-        Mockito.when(geoService.byIp(ipAddress)).thenCallRealMethod();
+        Mockito.when(geoService.byIp(ipAddress)).thenReturn(expectedLocation);
         Location location = geoService.byIp(ipAddress);
 
         Assertions.assertEquals(expectedLocation.getCountry(), location.getCountry());
@@ -36,7 +35,8 @@ class GeoServiceImplTest {
 
     @Test
     void byCoordinates() {
-        Mockito.when(geoService.byCoordinates(25.21,55.23)).thenCallRealMethod();
+        Mockito.when(geoService.byCoordinates(25.21,55.23)).thenThrow(new RuntimeException("Not implemented"));
+        
         RuntimeException e = Assertions.assertThrows(RuntimeException.class, () -> {
             geoService.byCoordinates(25.21,55.23);
         });

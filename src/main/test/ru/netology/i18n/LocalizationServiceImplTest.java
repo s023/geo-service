@@ -25,7 +25,7 @@ class LocalizationServiceImplTest {
     void locale(Country country, String expected) {
 
         LocalizationService localizationService = Mockito.mock(LocalizationServiceImpl.class);
-        Mockito.when(localizationService.locale(country)).thenCallRealMethod();
+        Mockito.when(localizationService.locale(country)).thenReturn(expected);
 
         String result = localizationService.locale(country);
 
